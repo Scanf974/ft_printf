@@ -158,10 +158,9 @@ char		*ft_putarg(const char *f, va_list ap, t_format *fg)
 		else
 		{
 			dst = va_arg(ap, char *);
-			if (dst)
-				dst = ft_transfo_int(dst, fg);
-			else
+			if (!dst)
 				dst = ft_strdup("(null)");
+			dst = ft_transfo_int(dst, fg);
 		}
 	}
 	else

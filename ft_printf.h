@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdarg.h>
+# include <stdio.h> //PAS DE PRINF OH BON DIEU
 
 # define NONE	0
 # define LEFT	1
@@ -58,7 +59,9 @@ typedef struct	s_format
 
 void			ft_putchar(char c);
 void			ft_putstr(char *s);
+void			ft_putstr_c(char *s, int len);
 int				ft_strlen(const char *s);
+int				ft_wstrlen(const char *s);
 int				ft_strlen_per(const char *s);
 char			*ft_itoa(int n);
 char			*ft_strnew(unsigned int size);
@@ -78,9 +81,10 @@ char			*ft_transfo_int(char *str, t_format *fg);
 char			*ft_transfo_hexoct(char *str, t_format *fg);
 char			*ft_strjoin(const char *s1, const char *s2);
 char			*ft_strjoin_per(const char *s1, const char *s2);
-char			*ft_strjoin_etoile(const char *s1, const char *s2);
 char			*ft_strjoin_per_aux(const char *s1, const char *s2);
 char			*ft_strjoin_per_aux2(const char *s1, const char *s2);
+char			*ft_strjoin_etoile(const char *s1, const char *s2);
+char			*ft_strnjoin(const char *s1, const char *s2, int len);
 int				ft_pow(int base, int pow);
 int				ft_strequ(char const *s1, char const *s2);
 void			ft_initflags(t_format **fg);
@@ -91,6 +95,6 @@ void			ft_putflags(char flg, t_format **fg);
 char			*ft_binary(unsigned long long int nb, t_format *fg);
 char			*ft_bin_to_hexoct(char *str, int conv, t_format *fg);
 char			*ft_putwidth(char *str, int width, t_format *fg);
-unsigned char	*ft_split_bytes(char *bin);
+char			*ft_split_bytes(char *bin);
 
 #endif

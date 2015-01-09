@@ -83,7 +83,7 @@ static unsigned char	*ft_make_int(char **tab)
 	return (dst);
 }
 
-unsigned char		*ft_split_bytes(char *bin)
+char			*ft_split_bytes(char *bin)
 {
 	char			**tab;
 	char			*tab_wchar;
@@ -105,6 +105,6 @@ unsigned char		*ft_split_bytes(char *bin)
 		tab = ft_make_unicode(mask[2], bin, 3);
 	else
 		tab = ft_make_unicode(mask[3], bin, 4);
-	tab_wchar = ft_make_int(tab);
+	tab_wchar = (char *)ft_make_int(tab);
 	return (tab_wchar);
 }

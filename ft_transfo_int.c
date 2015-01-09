@@ -12,10 +12,13 @@
 
 #include "ft_printf.h"
 
-static void	ft_prec_str(char *dst, char *str, t_format *fg)
+static char	*ft_prec_str(char *str, t_format *fg)
 {
-	str[fg->precision] = '\0';
-	dst = str;
+	char	*dst;
+
+	dst = ft_strdup(str);
+	dst[fg->precision] = '\0';
+	return (dst);
 }
 
 static char	*ft_precision(char *str, t_format *fg)
@@ -24,7 +27,6 @@ static char	*ft_precision(char *str, t_format *fg)
 	int		prec;
 
 	prec = fg->precision - ft_strlen(str);
-
 	if (prec >= 0 && fg->conversion != 'c' && fg->conversion != 'C'
 			&& fg->conversion != 's' && fg->conversion != 'S')
 	{
@@ -43,7 +45,7 @@ static char	*ft_precision(char *str, t_format *fg)
 		dst = ft_strjoin_per_aux(dst, str);
 	}
 	else if (fg->conversion == 's' && fg->did_p)
-		ft_prec_str(dst, str, fg);
+		dst = ft_prec_str(str, fg);
 	else if (fg->precision == 0 && ft_strequ("0", str) && fg->did_p)
 		return ("");
 	else

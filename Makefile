@@ -2,8 +2,10 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 SRC = ft_putchar.c \
 	  ft_putstr.c \
+	  ft_putstr_c.c \
 	  ft_initflags.c \
 	  ft_strlen.c \
+	  ft_wstrlen.c \
 	  ft_putarg.c \
 	  ft_strnew.c \
 	  ft_atoi.c \
@@ -19,6 +21,7 @@ SRC = ft_putchar.c \
 	  ft_intlen.c \
 	  ft_strlen_per.c \
 	  ft_strjoin.c \
+	  ft_strnjoin.c \
 	  ft_strjoin_per.c \
 	  ft_strjoin_etoile.c \
 	  ft_strjoin_per_aux.c \

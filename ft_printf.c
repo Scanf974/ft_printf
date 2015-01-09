@@ -20,15 +20,18 @@ int		ft_printf(const char *format, ...)
 	char		*dst;
 	char		*temp;
 	char		*same;
+	int			len;
 
 	va_start(ap, format);
 	i = 0;
+	len = 0;
 	same = ft_strdup(format);
 	if (ft_strlen(same) == 1)
 	{
 		dst = (char *)malloc(sizeof(char) * 2);
 		dst[0] = *same;
 		dst[1] = '\0';
+		len++;
 	}
 	else
 	{
@@ -39,6 +42,10 @@ int		ft_printf(const char *format, ...)
 			{
 				i = ft_check_flags(same, &fg, ap);
 				temp = ft_putarg(&same[i], ap, fg);
+				if (temp[0] == 0)
+					len += 1;
+				else
+					len += ft_strlen(temp);
 				same += i;
 			}
 			else
@@ -46,12 +53,13 @@ int		ft_printf(const char *format, ...)
 				temp = (char *)malloc(sizeof(char) * 2);
 				temp[0] = *same;
 				temp[1] = '\0';
+				len++;
 			}
-			dst = ft_strjoin(dst, temp);
+			dst = ft_strnjoin(dst, temp, len);
 			same++;
 		}
 		va_end(ap);
 	}
-	ft_putstr(dst);
+	ft_putstr_c(dst, len);
 	return (ft_strlen(dst));
 }

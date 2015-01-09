@@ -31,9 +31,8 @@ int		main(int argc, char **argv)
 	int				n2 = 206;
 	int				n3 = 177;
 
-	//ft_printf("sdf");
-	dprintf(1, "%c adfa\n", 0);
-	ft_printf("%c asdfadf\n", 0);
+	dprintf(1, "%18.2s sdf\n", "je suis");
+	ft_printf("%18S sdf\n", L"je suid");
 	nb = ft_atoi(argv[1]);
 #ifdef TEST_COMP_OCT
 	i = 1;

@@ -12,13 +12,27 @@
 
 #include "ft_printf.h"
 
+int		ft_check_flags_aux2(char *my_fg, t_format **fg)
+{
+	int		i;
+	char	*flags;
+
+	i = 0;
+	flags = ft_strdup("*lhjz");
+	while (ft_charcheck_in_str(my_fg[i], flags))
+	{
+		ft_putflags(my_fg[i], fg);
+		i++;
+	}
+	return (i);
+}
 int		ft_check_flags_aux(char *my_fg, t_format **fg)
 {
 	int		i;
 	char	*flags;
 
 	i = 0;
-	flags = ft_strdup("#0-+* lhjz");
+	flags = ft_strdup("#0-+* ");
 	while (ft_charcheck_in_str(my_fg[i], flags))
 	{
 		ft_putflags(my_fg[i], fg);
@@ -38,13 +52,13 @@ int		ft_check_flags(const char *str, t_format **fg, va_list ap)
 	ft_initflags(fg);
 	conversion = ft_strdup("sSpdDioOuUxXcC");
 	my_fg = ft_strdup(&str[1]);
-	while (my_fg[i] == '*')
+/*	while (my_fg[i] == '*')
 	{
 		temp = ft_strjoin_etoile(my_fg, ft_itoa(va_arg(ap, int)));
 		while (my_fg[i] != '*')
 			i++;
 		my_fg = ft_strjoin(temp, &my_fg[i + 1]);
-	}
+	}*/
 	i = ft_check_flags_aux(my_fg, fg);
 	(*fg)->width = ft_atoi(&my_fg[i]);
 	if ((*fg)->width != 0)
@@ -64,6 +78,7 @@ int		ft_check_flags(const char *str, t_format **fg, va_list ap)
 	}
 	if (my_fg[i] == '0')
 		i++;
+	i += ft_check_flags_aux2(&my_fg[i], fg);
 	if (ft_charcheck_in_str(my_fg[i], conversion))
 		(*fg)->conversion = my_fg[i];
 	return (i + 1);
