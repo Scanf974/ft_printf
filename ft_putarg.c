@@ -122,7 +122,7 @@ char		*ft_putarg(const char *f, va_list ap, t_format *fg)
 	tab = (int *)malloc(sizeof(int) * 65);
 	dst = (char *)malloc(sizeof(char) * (2));
 	dst[1] = '\0';
-	while (ft_charcheck_in_str(*f, "#0-+ lhjz"))
+	while (ft_charcheck_in_str(*f, "#0-+ *lhjz"))
 		f++;
 	if (*f == 'c' || *f == 'C')
 		dst = ft_cac(ap, fg);
@@ -154,6 +154,7 @@ char		*ft_putarg(const char *f, va_list ap, t_format *fg)
 				dst = ft_strjoin(dst, temp);
 				i++;
 			}
+			dst = ft_transfo_int(dst, fg);
 		}
 		else
 		{

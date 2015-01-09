@@ -44,7 +44,7 @@ static char	*ft_precision(char *str, t_format *fg)
 			dst = ft_memset(dst, '0', prec);
 		dst = ft_strjoin_per_aux(dst, str);
 	}
-	else if (fg->conversion == 's' && fg->did_p)
+	else if ((fg->conversion == 's' || fg->conversion == 'S')  && fg->did_p)
 		dst = ft_prec_str(str, fg);
 	else if (fg->precision == 0 && ft_strequ("0", str) && fg->did_p)
 		return ("");

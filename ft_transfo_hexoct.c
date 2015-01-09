@@ -90,8 +90,8 @@ static char	*ft_width(char *str, t_format *fg)
 		{
 			dst = ft_memset(dst, '0', width);
 			if (((fg->conversion == 'x' || fg->conversion == 'X')
-				&& fg->flag->tag && !ft_strequ(str, "0"))
-				|| fg->conversion == 'p')
+						&& fg->flag->tag && !ft_strequ(str, "0"))
+					|| fg->conversion == 'p')
 				ft_zero(dst, str, fg);
 			dst = ft_strjoin_per(dst, str);
 		}
@@ -110,12 +110,12 @@ char		*ft_transfo_hexoct(char *str, t_format *fg)
 	char	*dst;
 	int		prec;
 
-	dst = ft_precision(str, fg);
-	dst = ft_flags(dst, fg);
-	dst = ft_width(dst, fg);
 	if (fg->flag->tag && fg->did_p && fg->conversion == 'o' && ft_strequ(str, "0"))
 		dst = ft_strdup("0");
 	if (fg->did_p && fg->conversion == 'p' && ft_strequ(str, "0"))
 		dst = ft_strdup("0x");
+	dst = ft_precision(str, fg);
+	dst = ft_flags(dst, fg);
+	dst = ft_width(dst, fg);
 	return (dst);
 }

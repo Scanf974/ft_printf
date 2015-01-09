@@ -61,7 +61,6 @@ void			ft_putchar(char c);
 void			ft_putstr(char *s);
 void			ft_putstr_c(char *s, int len);
 int				ft_strlen(const char *s);
-int				ft_wstrlen(const char *s);
 int				ft_strlen_per(const char *s);
 char			*ft_itoa(int n);
 char			*ft_strnew(unsigned int size);

@@ -15,12 +15,13 @@
 #include <stdio.h>
 #include <wchar.h>
 #include <limits.h>
+#include <locale.h>
 
-//#define TEST_COMP_INT
-//#define TEST_COMP_HEX
-//#define TEST_COMP_OCT
-//#define TEST_ERROR
-//#define TEST_RANDOM
+#define TEST_COMP_INT
+#define TEST_COMP_HEX
+#define TEST_COMP_OCT
+#define TEST_ERROR
+#define TEST_RANDOM
 
 int		main(int argc, char **argv)
 {
@@ -30,10 +31,18 @@ int		main(int argc, char **argv)
 	int				n1 = 232;
 	int				n2 = 206;
 	int				n3 = 177;
+	int				ret;
 
-	dprintf(1, "%18.2s sdf\n", "je suis");
-	ft_printf("%18S sdf\n", L"je suid");
+	char *l = setlocale(LC_ALL, "en_US.UTF-8"); 
+
+	if (l == NULL) 
+		printf("Locale not set\n"); 
+	else
+		printf("Locale set to %s\n", l); 
+
 	nb = ft_atoi(argv[1]);
+	dprintf(1, "%####0000 33...12..15..#00d\n", 256);
+	ft_printf("%####0000 33...12..15..#00d\n", 256);
 #ifdef TEST_COMP_OCT
 	i = 1;
 	dprintf(1, "{red}%s{eoc}\n", "---Le test avec les OCT seulement---");
@@ -222,7 +231,7 @@ int		main(int argc, char **argv)
 
 	//TEST 16
 	dprintf(1, "%d = %**.3d\n", i, 3, 9, (int)nb);
-	ft_printf("%d = %**.3d\n", i, 9, 3, nb);
+	ft_printf("%d = %**.3d\n", i, 3, 9, nb);
 	i++;
 
 #endif
@@ -240,7 +249,7 @@ int		main(int argc, char **argv)
 	dprintf(1, "%d = %-5.5-10-d\n", i, nb);
 	ft_printf("%d = %-5-d\n", i, nb);
 	i++;
-	*/
+	 */
 #endif
 #ifdef TEST_RANDOM	
 	i = 1;

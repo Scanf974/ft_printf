@@ -32,7 +32,7 @@ int		ft_check_flags_aux(char *my_fg, t_format **fg)
 	char	*flags;
 
 	i = 0;
-	flags = ft_strdup("#0-+* ");
+	flags = ft_strdup("#0-+ lhjz*");
 	while (ft_charcheck_in_str(my_fg[i], flags))
 	{
 		ft_putflags(my_fg[i], fg);
@@ -47,19 +47,18 @@ int		ft_check_flags(const char *str, t_format **fg, va_list ap)
 	char	*conversion;
 	int		i;
 	char	*temp;
+	int		nb;
+	int		save;
+	int		j;
 
 	i = 0;
+	save = 0;
 	ft_initflags(fg);
 	conversion = ft_strdup("sSpdDioOuUxXcC");
 	my_fg = ft_strdup(&str[1]);
-/*	while (my_fg[i] == '*')
-	{
-		temp = ft_strjoin_etoile(my_fg, ft_itoa(va_arg(ap, int)));
-		while (my_fg[i] != '*')
-			i++;
-		my_fg = ft_strjoin(temp, &my_fg[i + 1]);
-	}*/
-	i = ft_check_flags_aux(my_fg, fg);
+	nb = 0;
+	
+	i += ft_check_flags_aux(my_fg, fg);
 	(*fg)->width = ft_atoi(&my_fg[i]);
 	if ((*fg)->width != 0)
 		i += ft_intlen((*fg)->width);
@@ -78,8 +77,26 @@ int		ft_check_flags(const char *str, t_format **fg, va_list ap)
 	}
 	if (my_fg[i] == '0')
 		i++;
-	i += ft_check_flags_aux2(&my_fg[i], fg);
+	i += ft_check_flags_aux(&my_fg[i], fg);
 	if (ft_charcheck_in_str(my_fg[i], conversion))
 		(*fg)->conversion = my_fg[i];
+	else
+		(*fg)->flag->blank = 0;
+	j = 0;
+	while (my_fg[j] == '*' || ft_isdigit(my_fg[j]))
+	{
+		if (my_fg[j] == '*')
+		{
+			nb = va_arg(ap, int);
+			save = j;
+		}
+		j++;
+	}
+	if (save == j - 1)
+		temp = ft_itoa(nb);
+	else
+		temp = ft_itoa(ft_atoi(&my_fg[save + 1]));
+	if (save)	
+		(*fg)->width = ft_atoi(temp);
 	return (i + 1);
 }

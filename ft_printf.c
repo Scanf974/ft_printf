@@ -42,7 +42,7 @@ int		ft_printf(const char *format, ...)
 			{
 				i = ft_check_flags(same, &fg, ap);
 				temp = ft_putarg(&same[i], ap, fg);
-				if (temp[0] == 0)
+				if (temp[0] == 0 && (!fg->conversion == 'd'))
 					len += 1;
 				else
 					len += ft_strlen(temp);

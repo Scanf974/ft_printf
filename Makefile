@@ -5,7 +5,6 @@ SRC = ft_putchar.c \
 	  ft_putstr_c.c \
 	  ft_initflags.c \
 	  ft_strlen.c \
-	  ft_wstrlen.c \
 	  ft_putarg.c \
 	  ft_strnew.c \
 	  ft_atoi.c \
