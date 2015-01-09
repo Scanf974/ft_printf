@@ -18,7 +18,7 @@ static char	*ft_precision(char *str, t_format *fg)
 	int		prec;
 
 	prec = fg->precision - ft_strlen(str);
-	if (str[0] == '0' && ft_strlen(str) == 1 && fg->did_p && fg->precision == 0)
+	if (!fg->flag->tag && ft_strequ(str, "0") && fg->did_p && fg->precision == 0)
 		dst = ft_strdup("");
 	else if (prec >= 0)
 	{
@@ -112,8 +112,8 @@ char		*ft_transfo_hexoct(char *str, t_format *fg)
 
 	if (fg->flag->tag && fg->did_p && fg->conversion == 'o' && ft_strequ(str, "0"))
 		dst = ft_strdup("0");
-	if (fg->did_p && fg->conversion == 'p' && ft_strequ(str, "0"))
-		dst = ft_strdup("0x");
+	else if (fg->did_p && fg->conversion == 'p' && ft_strequ(str, "0"))
+		dst = ft_strdup("0x");	
 	dst = ft_precision(str, fg);
 	dst = ft_flags(dst, fg);
 	dst = ft_width(dst, fg);

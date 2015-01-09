@@ -17,11 +17,11 @@
 #include <limits.h>
 #include <locale.h>
 
-#define TEST_COMP_INT
-#define TEST_COMP_HEX
-#define TEST_COMP_OCT
-#define TEST_ERROR
-#define TEST_RANDOM
+//#define TEST_COMP_INT
+//#define TEST_COMP_HEX
+//#define TEST_COMP_OCT
+//#define TEST_ERROR
+//#define TEST_RANDOM
 
 int		main(int argc, char **argv)
 {
@@ -41,8 +41,9 @@ int		main(int argc, char **argv)
 		printf("Locale set to %s\n", l); 
 
 	nb = ft_atoi(argv[1]);
-	dprintf(1, "%####0000 33...12..15..#00d\n", 256);
-	ft_printf("%####0000 33...12..15..#00d\n", 256);
+	dprintf(1, "%.3S\n", L"éΩf");
+	ft_printf("%.3S\n", L"éΩf");
+
 #ifdef TEST_COMP_OCT
 	i = 1;
 	dprintf(1, "{red}%s{eoc}\n", "---Le test avec les OCT seulement---");
