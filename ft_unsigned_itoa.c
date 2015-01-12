@@ -70,8 +70,8 @@ static t_ullong	int_len(t_ullong n, t_ullong len)
 
 char			*ft_unsigned_itoa(t_ullong n)
 {
-	char		*str;
 	t_ullong	len;
+	char		*str;
 
 	if (n == 0)
 		str = ft_strdup("0");

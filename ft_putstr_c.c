@@ -11,4 +11,3 @@ void	ft_putstr_c(char *str, int len)
 		i++;
 	}
 }
-

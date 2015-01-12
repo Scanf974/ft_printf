@@ -57,7 +57,7 @@ int		ft_check_flags(const char *str, t_format **fg, va_list ap)
 	conversion = ft_strdup("sSpdDioOuUxXcC");
 	my_fg = ft_strdup(&str[1]);
 	nb = 0;
-	
+
 	i += ft_check_flags_aux(my_fg, fg);
 	(*fg)->width = ft_atoi(&my_fg[i]);
 	if ((*fg)->width != 0)
