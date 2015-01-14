@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/09 17:53:47 by bsautron          #+#    #+#             */
-/*   Updated: 2015/01/03 06:41:55 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/01/13 16:40:22 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,5 +117,7 @@ char		*ft_transfo_hexoct(char *str, t_format *fg)
 	dst = ft_precision(str, fg);
 	dst = ft_flags(dst, fg);
 	dst = ft_width(dst, fg);
+	if (fg->conversion == 'p' && ft_strequ(str, "0"))
+		dst = ft_strdup("0x0");
 	return (dst);
 }

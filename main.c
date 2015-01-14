@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/05 09:34:58 by bsautron          #+#    #+#             */
-/*   Updated: 2015/01/03 06:53:06 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/01/13 16:56:23 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,15 @@ int		main(int argc, char **argv)
 	int				ret;
 
 	char *l = setlocale(LC_ALL, "en_US.UTF-8"); 
-
+/*
 	if (l == NULL) 
 		printf("Locale not set\n"); 
 	else
 		printf("Locale set to %s\n", l); 
-
+*/
 	nb = ft_atoi(argv[1]);
-	dprintf(1, "%.3S\n", L"éΩf");
-	ft_printf("%.3S\n", L"éΩf");
+	printf("%hhC, %hhC\n", 0, L'米');
+	ft_printf("%hhC, %hhC\n", 0, L'米');
 
 #ifdef TEST_COMP_OCT
 	i = 1;

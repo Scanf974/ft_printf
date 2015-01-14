@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/05 09:43:21 by bsautron          #+#    #+#             */
-/*   Updated: 2015/01/03 06:50:32 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/01/13 16:48:49 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,20 +139,25 @@ char		*ft_putarg(const char *f, va_list ap, t_format *fg)
 			tab = va_arg(ap, int *);
 			temp = (char *)malloc(sizeof(char) * 2);
 			i = 0;
-			while (tab[i])
+			if (!tab)
+				dst = ft_strdup("(null)");
+			else
 			{
-				if (tab[i] > 127)
+				while (tab[i])
 				{
-					bin = ft_binary(tab[i], fg);
-					temp = ft_split_bytes(bin);
+					if (tab[i] > 127)
+					{
+						bin = ft_binary(tab[i], fg);
+						temp = ft_split_bytes(bin);
+					}
+					else
+					{
+						temp[0] = tab[i];
+						temp[1] = '\0';
+					}
+					dst = ft_strjoin(dst, temp);
+					i++;
 				}
-				else
-				{
-					temp[0] = tab[i];
-					temp[1] = '\0';
-				}
-				dst = ft_strjoin(dst, temp);
-				i++;
 			}
 			dst = ft_transfo_int(dst, fg);
 		}

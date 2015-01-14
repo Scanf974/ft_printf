@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/05 09:17:00 by bsautron          #+#    #+#             */
-/*   Updated: 2014/12/31 01:23:59 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/01/13 16:44:44 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ int		ft_printf(const char *format, ...)
 			{
 				i = ft_check_flags(same, &fg, ap);
 				temp = ft_putarg(&same[i], ap, fg);
-				if (temp[0] == 0 && (!fg->conversion == 'd'))
+				//dprintf(1, "temp = %s\n", temp);
+				if (temp[0] == 0 && fg->conversion != 'd' && fg->conversion != 's')
 					len += 1;
 				else
 					len += ft_strlen(temp);
@@ -55,11 +56,15 @@ int		ft_printf(const char *format, ...)
 				temp[1] = '\0';
 				len++;
 			}
-			dst = ft_strnjoin(dst, temp, len);
+			if (ft_strlen(temp))
+				dst = ft_strnjoin(dst, temp, len);
+			//ft_putstr_c(dst, len);
+			//ft_putchar(10);
 			same++;
 		}
 		va_end(ap);
 	}
+	//ft_putstr("Final = ");
 	ft_putstr_c(dst, len);
 	return (ft_strlen(dst));
 }
