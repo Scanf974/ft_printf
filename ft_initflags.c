@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/08 07:04:38 by bsautron          #+#    #+#             */
-/*   Updated: 2014/12/09 17:56:09 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/01/14 23:26:59 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	ft_initflags(t_format **fg)
 	(*fg)->width = 0;
 	(*fg)->precision = 0;
 	(*fg)->did_p = 0;
+	(*fg)->my_god = 0;
 	(*fg)->over_flag->l_long = 0;
 	(*fg)->over_flag->l_short = 0;
 	(*fg)->over_flag->l_double = 0;

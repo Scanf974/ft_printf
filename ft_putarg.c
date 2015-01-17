@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/05 09:43:21 by bsautron          #+#    #+#             */
-/*   Updated: 2015/01/13 16:48:49 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/01/17 05:10:23 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static char	*ft_int(va_list ap, t_format *fg)
 	else if (!fg->over_flag->l_long)
 		nb = (int)nb;
 	dst = ft_long_itoa(nb);
-	return (ft_transfo_int(dst, fg));
+	return (ft_transfo_int(dst, fg, NULL, 0));
 }
 
 static char	*ft_hex(va_list ap, t_format *fg)
@@ -82,13 +82,13 @@ static char	*ft_oct(va_list ap, t_format *f)
 	else if (!f->over_flag->l_long)
 		nb = (unsigned int)nb;
 	if (f->conversion == 'u' || f->conversion == 'U')
-		dst = ft_transfo_int(ft_unsigned_itoa(nb), f);
+		dst = ft_transfo_int(ft_unsigned_itoa(nb), f, NULL, 0);
 	else
 		dst = ft_transfo_hexoct(ft_bin_to_hexoct(ft_binary(nb, f), OCT, f), f);
 	return (dst);
 }
 
-static char	*ft_cac(va_list ap, t_format *fg)
+static char	*ft_cac(va_list ap, t_format *fg, int *tab_b)
 {
 	int				nb;
 	char			*bin;
@@ -97,35 +97,37 @@ static char	*ft_cac(va_list ap, t_format *fg)
 
 	i = 0;
 	nb = va_arg(ap, int);
-	if (nb > 127 && (fg->conversion == 'C' || (fg->conversion == 'c' && fg->over_flag->l_long)))
+	if (nb == 0)
+		fg->my_god = 1;
+	if (nb > 127
+			&& (fg->conversion == 'C'
+				|| (fg->conversion == 'c' && fg->over_flag->l_long)))
 	{
 		bin = ft_binary(nb, fg);
-		dst = ft_split_bytes(bin);
+		dst = ft_split_bytes(bin, tab_b);
 	}
 	else
 	{
 		dst = (char *)malloc(sizeof(char) * 2);
 		dst[0] = nb;
 		dst[1] = '\0';
+		*tab_b = 1;
 	}
-	return (ft_transfo_int(dst, fg));
+	return (ft_transfo_int(dst, fg, tab_b, 1));
 }
 
 char		*ft_putarg(const char *f, va_list ap, t_format *fg)
 {
 	char			*dst;
-	char			*bin;
-	char			*temp;
-	int				i;
-	int				*tab;
+	int				nb_bytes;
+	int				*tab_b;
 
-	tab = (int *)malloc(sizeof(int) * 65);
 	dst = (char *)malloc(sizeof(char) * (2));
 	dst[1] = '\0';
-	while (ft_charcheck_in_str(*f, "#0-+ *lhjz"))
+	while (ft_charcheck_in_str(*f, "#0-+ lhjz"))
 		f++;
 	if (*f == 'c' || *f == 'C')
-		dst = ft_cac(ap, fg);
+		dst = ft_cac(ap, fg, &nb_bytes);
 	else if (*f == 'd' || *f == 'i' || *f == 'D')
 		dst = ft_int(ap, fg);
 	else if (*f == 'x' || *f == 'X' || *f == 'p')
@@ -133,46 +135,11 @@ char		*ft_putarg(const char *f, va_list ap, t_format *fg)
 	else if (*f == 'o' || *f == 'O' || *f == 'u' || *f == 'U')
 		dst = ft_oct(ap, fg);
 	else if (*f == 's' || *f == 'S')
-	{
-		if (*f == 'S' || (*f == 's' && fg->over_flag->l_long))
-		{
-			tab = va_arg(ap, int *);
-			temp = (char *)malloc(sizeof(char) * 2);
-			i = 0;
-			if (!tab)
-				dst = ft_strdup("(null)");
-			else
-			{
-				while (tab[i])
-				{
-					if (tab[i] > 127)
-					{
-						bin = ft_binary(tab[i], fg);
-						temp = ft_split_bytes(bin);
-					}
-					else
-					{
-						temp[0] = tab[i];
-						temp[1] = '\0';
-					}
-					dst = ft_strjoin(dst, temp);
-					i++;
-				}
-			}
-			dst = ft_transfo_int(dst, fg);
-		}
-		else
-		{
-			dst = va_arg(ap, char *);
-			if (!dst)
-				dst = ft_strdup("(null)");
-			dst = ft_transfo_int(dst, fg);
-		}
-	}
+		dst = ft_long_str(ap, f, dst, &tab_b, &nb_bytes, fg);
 	else
 	{
 		dst[0] = *f;
-		dst = ft_transfo_int(dst, fg);
+		dst = ft_transfo_int(dst, fg, tab_b, ft_strlen(dst));
 	}
 	return (dst);
 }

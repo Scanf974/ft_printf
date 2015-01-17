@@ -6,7 +6,7 @@
 /*   By: bsautron <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/06 17:04:14 by bsautron          #+#    #+#             */
-/*   Updated: 2014/12/31 10:28:26 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/01/17 03:32:24 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ char					*ft_long_itoa(long long int n)
 	char			*str;
 	long long int	len;
 
-	if (n  == -9223372036854775807 - 1)
+	if (n == -9223372036854775807 - 1)
 		str = ft_strdup("-9223372036854775808");
 	else if (n == 0)
 		str = ft_strdup("0");

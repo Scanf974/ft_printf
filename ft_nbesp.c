@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_c.c                                      :+:      :+:    :+:   */
+/*   ft_nbesp.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/01/17 04:12:01 by bsautron          #+#    #+#             */
-/*   Updated: 2015/01/17 04:12:02 by bsautron         ###   ########.fr       */
+/*   Created: 2015/01/17 03:48:46 by bsautron          #+#    #+#             */
+/*   Updated: 2015/01/17 03:49:35 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-
-void	ft_putstr_c(char *str, int len)
+int		ft_nbesp(char *str)
 {
 	int		i;
 
 	i = 0;
-	while (i < len)
-	{
-		ft_putchar(str[i]);
+	while (str[i] && str[i] <= ' ')
 		i++;
-	}
+	return (i);
 }

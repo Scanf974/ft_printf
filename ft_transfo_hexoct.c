@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/09 17:53:47 by bsautron          #+#    #+#             */
-/*   Updated: 2015/01/13 16:40:22 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/01/17 04:05:49 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,25 +18,13 @@ static char	*ft_precision(char *str, t_format *fg)
 	int		prec;
 
 	prec = fg->precision - ft_strlen(str);
-	if (!fg->flag->tag && ft_strequ(str, "0") && fg->did_p && fg->precision == 0)
+	if (fg->conversion == 'p')
+		prec += 1;
+	if (!fg->flag->tag && ft_strequ(str, "0")
+		&& fg->did_p && fg->precision == 0)
 		dst = ft_strdup("");
 	else if (prec >= 0)
-	{
-		dst = ft_strnew(prec + 2);
-		if (str[0] == '-' || str[0] == '+')
-		{
-			prec++;
-			dst = ft_memset(dst, '0', prec);
-			if (str[0] == '-')
-				dst[0] = '-';
-			else if (str[0] == '+')
-				dst[0] = '+';
-			str[0] = '0';
-		}
-		else
-			dst = ft_memset(dst, '0', prec);
-		dst = ft_strjoin_per(dst, str);
-	}
+		dst = ft_putprecision_ho(str, dst, prec, fg);
 	else
 		dst = ft_strdup(str);
 	return (dst);
@@ -55,8 +43,7 @@ static char	*ft_flags(char *str, t_format *fg)
 		if (fg->flag->tag && (fg->conversion == 'o' || fg->conversion == 'O') &&
 				ft_strlen(str) > fg->precision)
 			dst = ft_strjoin_per("0", str);
-		else if ((fg->flag->tag && fg->conversion == 'x')
-				|| fg->conversion == 'p')
+		else if ((fg->flag->tag && fg->conversion == 'x'))
 			dst = ft_strjoin_per("0x", str);
 		else if (fg->flag->tag && fg->conversion == 'X')
 			dst = ft_strjoin_per("0X", str);
@@ -110,14 +97,15 @@ char		*ft_transfo_hexoct(char *str, t_format *fg)
 	char	*dst;
 	int		prec;
 
-	if (fg->flag->tag && fg->did_p && fg->conversion == 'o' && ft_strequ(str, "0"))
-		dst = ft_strdup("0");
-	else if (fg->did_p && fg->conversion == 'p' && ft_strequ(str, "0"))
-		dst = ft_strdup("0x");	
+	if (fg->conversion == 'x' && fg->did_p
+		&& fg->precision == 0 && ft_strequ(str, "0"))
+		str = ft_strdup("");
+	if (fg->conversion == 'p' && ft_strequ(str, "0") && fg->did_p)
+		str = ft_strdup("0x");
+	else if (fg->conversion == 'p')
+		str = ft_strjoin("0x", str);
 	dst = ft_precision(str, fg);
 	dst = ft_flags(dst, fg);
 	dst = ft_width(dst, fg);
-	if (fg->conversion == 'p' && ft_strequ(str, "0"))
-		dst = ft_strdup("0x0");
 	return (dst);
 }

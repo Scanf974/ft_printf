@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strnjoin.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/01/14 23:10:52 by bsautron          #+#    #+#             */
+/*   Updated: 2015/01/17 04:06:28 by bsautron         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 static char	*ft_strncat_p(char *s1, const char *s2, int len, int len_all)
@@ -27,21 +39,19 @@ static char	*ft_strncpy_p(char *dst, const char *src, int len)
 	return (dst);
 }
 
-char	*ft_strnjoin(char const *s1, char const *s2, int len)
+char		*ft_strnjoin(char const *s1, char const *s2, int len_s, int len_t)
 {
-	int		len_src;
+	int		len_s2;
 	char	*dst;
 
 	if (s1 && s2)
 	{
-		len_src = len - ft_strlen(s2);
-		if (ft_strlen(s2) == 0)
-			len_src--;
-		dst = ft_memalloc(len + 1);
+		len_s2 = len_t - len_s;
+		dst = ft_memalloc(len_t + 1);
 		if (dst)
 		{
-			dst = ft_strncpy_p(dst, s1, len_src);
-			dst = ft_strncat_p(dst, s2, len_src, len);
+			dst = ft_strncpy_p(dst, s1, len_s);
+			dst = ft_strncat_p(dst, s2, len_s, len_t);
 			return (dst);
 		}
 	}

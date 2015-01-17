@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_c.c                                      :+:      :+:    :+:   */
+/*   ft_onlyesp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/01/17 04:12:01 by bsautron          #+#    #+#             */
-/*   Updated: 2015/01/17 04:12:02 by bsautron         ###   ########.fr       */
+/*   Created: 2014/12/25 05:18:35 by bsautron          #+#    #+#             */
+/*   Updated: 2015/01/14 20:53:51 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-
-void	ft_putstr_c(char *str, int len)
+char	ft_onlyesp(char *str)
 {
 	int		i;
+	int		ret;
 
+	ret = 1;
 	i = 0;
-	while (i < len)
+	while (str[i])
 	{
-		ft_putchar(str[i]);
+		if (str[i] > ' ')
+		{
+			ret = 0;
+			break ;
+		}
 		i++;
 	}
+	return (ret);
 }

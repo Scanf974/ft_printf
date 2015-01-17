@@ -1,12 +1,14 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 SRC = ft_putchar.c \
+	  ft_onlyesp.c \
 	  ft_putstr.c \
 	  ft_putstr_c.c \
 	  ft_initflags.c \
 	  ft_strlen.c \
 	  ft_putarg.c \
 	  ft_strnew.c \
+	  ft_nbesp.c \
 	  ft_atoi.c \
 	  ft_itoa.c \
 	  ft_long_itoa.c \
@@ -22,7 +24,6 @@ SRC = ft_putchar.c \
 	  ft_strjoin.c \
 	  ft_strnjoin.c \
 	  ft_strjoin_per.c \
-	  ft_strjoin_etoile.c \
 	  ft_strjoin_per_aux.c \
 	  ft_strjoin_per_aux2.c \
 	  ft_strncat.c \
@@ -36,8 +37,11 @@ SRC = ft_putchar.c \
 	  ft_transfo_hexoct.c \
 	  ft_binary.c \
 	  ft_bin_to_hexoct.c \
+	  ft_putprecision.c \
+	  ft_putprecision_ho.c \
 	  ft_putwidth.c \
 	  ft_split_bytes.c \
+	  ft_long_str.c \
 	  ft_check_flags.c
 OBJ = $(SRC:.c=.o)
 LIB = -L -lftprintf

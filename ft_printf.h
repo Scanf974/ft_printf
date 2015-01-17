@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/05 09:16:56 by bsautron          #+#    #+#             */
-/*   Updated: 2014/12/26 10:09:57 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/01/17 05:15:20 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdarg.h>
-# include <stdio.h> //PAS DE PRINF OH BON DIEU
 
 # define NONE	0
 # define LEFT	1
@@ -29,7 +28,7 @@
 
 typedef unsigned long long int	t_ullong;
 
-struct		s_flag
+struct			s_flag
 {
 	char	left;
 	char	zero;
@@ -38,7 +37,7 @@ struct		s_flag
 	char	tag;
 };
 
-struct		s_over
+struct			s_over
 {
 	char	l_short;
 	char	l_long;
@@ -54,6 +53,7 @@ typedef struct	s_format
 	int				width;
 	int				precision;
 	char			did_p;
+	char			my_god;
 	char			conversion;
 }				t_format;
 
@@ -63,6 +63,7 @@ void			ft_putstr_c(char *s, int len);
 int				ft_strlen(const char *s);
 int				ft_strlen_per(const char *s);
 char			*ft_itoa(int n);
+int				ft_onlyesp(char *str);
 char			*ft_strnew(unsigned int size);
 char			*ft_long_itoa(long long int n);
 char			*ft_unsigned_itoa(t_ullong n);
@@ -74,16 +75,16 @@ char			*ft_strncpy(char *dst, const char *src, unsigned int n);
 char			*ft_strncat(char *s1, const char *s2, unsigned int n);
 int				ft_charcheck_in_str(char let, char *str);
 int				ft_isdigit(int c);
-long long int 	ft_atoi(const char *str);
+long long int	ft_atoi(const char *str);
 int				ft_intlen(int n);
-char			*ft_transfo_int(char *str, t_format *fg);
+char			*ft_transfo_int(char *str, t_format *fg, int *tab_b, int len_b);
 char			*ft_transfo_hexoct(char *str, t_format *fg);
 char			*ft_strjoin(const char *s1, const char *s2);
 char			*ft_strjoin_per(const char *s1, const char *s2);
 char			*ft_strjoin_per_aux(const char *s1, const char *s2);
 char			*ft_strjoin_per_aux2(const char *s1, const char *s2);
 char			*ft_strjoin_etoile(const char *s1, const char *s2);
-char			*ft_strnjoin(const char *s1, const char *s2, int len);
+char			*ft_strnjoin(const char *s1, const char *s2, int s, int len);
 int				ft_pow(int base, int pow);
 int				ft_strequ(char const *s1, char const *s2);
 void			ft_initflags(t_format **fg);
@@ -94,6 +95,11 @@ void			ft_putflags(char flg, t_format **fg);
 char			*ft_binary(unsigned long long int nb, t_format *fg);
 char			*ft_bin_to_hexoct(char *str, int conv, t_format *fg);
 char			*ft_putwidth(char *str, int width, t_format *fg);
-char			*ft_split_bytes(char *bin);
+char			*ft_split_bytes(char *bin, int *nb_bytes);
+char			*ft_putprecision(char *str, char *dst, int prec, t_format *fg);
+char			*ft_putprecision_ho(char *s, char *d, int prec, t_format *fg);
+char			*ft_long_str(va_list ap, const char *f,
+		char *dst, int **tab_b, int *bn_bytes, t_format *fg);
+int				ft_nbesp(char *str);
 
 #endif

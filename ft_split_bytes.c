@@ -6,20 +6,17 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/26 09:06:17 by bsautron          #+#    #+#             */
-/*   Updated: 2014/12/26 10:10:47 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/01/17 04:10:56 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static char			**ft_make_unicode(char *mask, char *bin, int nb_bytes)
+static char				*ft_putmask(char *mask, char *bin)
 {
-	char	**tab;
 	int		i;
 	int		j;
-	int		k;
 
-	tab = (char **)malloc(sizeof(char *) * (nb_bytes + 1));
 	i = ft_strlen(mask) - 1;
 	j = ft_strlen(bin) - 1;
 	while (i >= 0)
@@ -34,8 +31,18 @@ static char			**ft_make_unicode(char *mask, char *bin, int nb_bytes)
 		}
 		i--;
 	}
+	return (mask);
+}
+
+static char				**ft_make_unicode(char *mask, char *bin, int *nb_bytes)
+{
+	char	**tab;
+	int		k;
+
+	tab = (char **)malloc(sizeof(char *) * (*nb_bytes + 1));
+	mask = ft_putmask(mask, bin);
 	k = 0;
-	while (k < nb_bytes)
+	while (k < *nb_bytes)
 	{
 		tab[k] = (char *)malloc(sizeof(char) * 9);
 		tab[k] = ft_strncpy(tab[k], mask, 8);
@@ -83,28 +90,27 @@ static unsigned char	*ft_make_int(char **tab)
 	return (dst);
 }
 
-char			*ft_split_bytes(char *bin)
+char					*ft_split_bytes(char *bin, int *nb_bytes)
 {
 	char			**tab;
 	char			*tab_wchar;
 	int				nb_bits;
 	char			*mask[4];
 
+	(*nb_bytes) = 0;
 	mask[0] = ft_strdup("0xxxxxxx");
 	mask[1] = ft_strdup("110xxxxx10xxxxxx");
 	mask[2] = ft_strdup("1110xxxx10xxxxxx10xxxxxx");
 	mask[3] = ft_strdup("11110xxx10xxxxxx10xxxxxx10xxxxxx");
-
 	nb_bits = ft_strlen(bin);
-
-	if (nb_bits <= 7)
-		tab = ft_make_unicode(mask[0], bin, 1);
-	else if (nb_bits <= 11)
-		tab = ft_make_unicode(mask[1], bin, 2);
-	else if (nb_bits <= 16)
-		tab = ft_make_unicode(mask[2], bin, 3);
-	else
-		tab = ft_make_unicode(mask[3], bin, 4);
+	if (++(*nb_bytes) && nb_bits <= 7)
+		tab = ft_make_unicode(mask[0], bin, nb_bytes);
+	else if (++(*nb_bytes) && nb_bits <= 11)
+		tab = ft_make_unicode(mask[1], bin, nb_bytes);
+	else if (++(*nb_bytes) && nb_bits <= 16)
+		tab = ft_make_unicode(mask[2], bin, nb_bytes);
+	else if (++(*nb_bytes))
+		tab = ft_make_unicode(mask[3], bin, nb_bytes);
 	tab_wchar = (char *)ft_make_int(tab);
 	return (tab_wchar);
 }
