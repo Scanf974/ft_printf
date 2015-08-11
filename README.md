@@ -1,7 +1,7 @@
 # ft_printf
 
 Like printf in C:      
-<cite>int ft_printf(const char *format, ...);</cite>
+<blockquote>int ft_printf(const char *format, ...);</blockquote>
 
 <h2>Format:</h2>
 %[flags][width][.precision][length]specifier
