@@ -17,11 +17,11 @@
 #include <limits.h>
 #include <locale.h>
 
-//#define TEST_COMP_INT
-//#define TEST_COMP_HEX
-//#define TEST_COMP_OCT
-//#define TEST_ERROR
-//#define TEST_RANDOM
+#define TEST_COMP_INT
+#define TEST_COMP_HEX
+#define TEST_COMP_OCT
+#define TEST_ERROR
+#define TEST_RANDOM
 
 int		main(int argc, char **argv)
 {
@@ -34,13 +34,10 @@ int		main(int argc, char **argv)
 	int				ret;
 
 	char *l = setlocale(LC_ALL, "en_US.UTF-8"); 
-/*
 	if (l == NULL) 
 		printf("Locale not set\n"); 
 	else
 		printf("Locale set to %s\n", l); 
-*/
-	nb = ft_atoi(argv[1]);
 	printf("%hhC, %hhC\n", 0, L'米');
 	ft_printf("%hhC, %hhC\n", 0, L'米');
 
@@ -295,7 +292,6 @@ int		main(int argc, char **argv)
 	printf("%010.5X\n", 0xff);
 	printf("%010.5o\n", 0732);
 	printf("%010.5O\n", 042);
-	printf("%025.20s\n", "This is a string");
 	printf("%010.5c\n", 'c');
 	ft_putstr("--------------------------------\n");
 	ft_printf("%010.5d\n", -42);
@@ -306,7 +302,6 @@ int		main(int argc, char **argv)
 	ft_printf("%010.5X\n", 0xff);
 	ft_printf("%010.5o\n", 0732);
 	ft_printf("%010.5O\n", 042);
-	ft_printf("%025.20s\n", "This is a string");
 	ft_printf("%010.5c\n", 'c');
 #endif
 	return 0;
