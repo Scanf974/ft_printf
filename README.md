@@ -1,13 +1,12 @@
 # ft_printf
 
 Like printf in C:
-
 int ft_printf(const char *format, ...);
 
-Format:
+<h2>Format:</h2>
 %[flags][width][.precision][length]specifier
 
-Flags:
+<h2>Flags:</h2>
 <table>
   <tr>
     <td>-</td>
@@ -20,5 +19,14 @@ Flags:
   <tr>
     <td>(space)</td>
     <td>If no sign is going to be written, a blank space is inserted before the value.</td>
+  </tr>
+  <tr>
+    <td>#</td>
+    <td>Used with o, x or X specifiers the value is preceeded with 0, 0x or 0X respectively for values different than zero.
+Used with a, A, e, E, f, F, g or G it forces the written output to contain a decimal point even if no more digits follow. By default, if no digits follow, no decimal point is written.</td>
+  </tr>
+  <tr>
+    <td>0</td>
+    <td>Left-pads the number with zeroes (0) instead of spaces when padding is specified (see width sub-specifier).</td>
   </tr>
 </table>
