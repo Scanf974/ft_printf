@@ -1,6 +1,6 @@
 # ft_printf
 
-Like printf in C:  
+As printf in C:  
 \#include \<ft_printf.h\>  
 int ft_printf(const char *format, ...);
 
